@@ -1,6 +1,5 @@
 import { ApolloProvider } from "@apollo/client";
 import React from "react";
-import "./App.css";
 import { TestMessage } from "./components/TestMessage";
 import { createApolloClient } from "./core/createApolloClient";
 
