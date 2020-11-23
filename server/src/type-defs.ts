@@ -1,35 +1,22 @@
 import { gql } from "apollo-server";
 
 export default gql`
-  type Pet {
-    """
-    아이디
-    """
+  type Product {
     id: ID!
-
-    """
-    이름
-    """
-    name: String!
-
-    """
-    별명
-    """
-    nickname: String
+    title: String!
+    price: Int!
   }
 
-  input PetInput {
-    name: String!
+  input ProductInput {
+    title: String!
+    price: Int!
   }
 
   type Query {
-    """
-    동물 칭구들
-    """
-    pets: [Pet!]
+    products: [Product!]
   }
 
   type Mutation {
-    addPet(pet: PetInput): Pet
+    addProduct(product: ProductInput): Product
   }
 `;

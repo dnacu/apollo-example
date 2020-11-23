@@ -1,108 +1,129 @@
-import { Pet, PetInput } from "./models/Pet";
+import { Product, ProductInput } from "./models/Product";
 import { generateRandomID } from "./utils/generateRandomID";
 
 let collections = {
-  pets: [
+  products: [
     {
       id: "pet_wqf0rv0im6",
-      name: "댕댕이100",
+      title: "댕댕이장난감100",
+      price: 10000,
     },
     {
       id: "pet_wqf0rv0im2",
-      name: "댕댕이2",
+      title: "댕댕이장난감2",
+      price: 10000,
     },
     {
       id: "pet_wqf0rv0im3",
-      name: "댕댕이3",
+      title: "댕댕이장난감3",
+      price: 10000,
     },
     {
       id: "pet_wqf0rv0im4",
-      name: "댕댕이4",
+      title: "댕댕이장난감4",
+      price: 10000,
     },
     {
       id: "pet_wqf0rv0im5",
-      name: "댕댕이5",
+      title: "댕댕이장난감5",
+      price: 10000,
     },
     {
       id: "pet_wqf0rv0i24",
-      name: "댕댕이6",
+      title: "댕댕이장난감6",
+      price: 10000,
     },
     {
       id: "pet_wqf0rv0im7",
-      name: "댕댕이7",
+      title: "댕댕이장난감7",
+      price: 10000,
     },
     {
       id: "pet_wqf0rv0im8",
-      name: "댕댕이8",
+      title: "댕댕이장난감8",
+      price: 10000,
     },
     {
       id: "pet_wqf0rv0im9",
-      name: "댕댕이9",
+      title: "댕댕이장난감9",
+      price: 10000,
     },
     {
       id: "pet_wqf0rv0i10",
-      name: "댕댕이10",
+      title: "댕댕이장난감10",
+      price: 10000,
     },
     {
       id: "pet_wqf0rv0i11",
-      name: "댕댕이11",
+      title: "댕댕이장난감11",
+      price: 10000,
     },
     {
       id: "pet_wqf0rv0i12",
-      name: "댕댕이12",
+      title: "댕댕이장난감12",
+      price: 10000,
     },
     {
       id: "pet_wqf0rv0i13",
-      name: "댕댕이13",
+      title: "댕댕이장난감13",
+      price: 10000,
     },
     {
       id: "pet_wqf0rv0i14",
-      name: "댕댕이14",
+      title: "댕댕이장난감14",
+      price: 10000,
     },
     {
       id: "pet_wqf0rv0i15",
-      name: "댕댕이15",
+      title: "댕댕이장난감15",
+      price: 10000,
     },
     {
       id: "pet_wqf0rv0i16",
-      name: "댕댕이16",
+      title: "댕댕이장난감16",
+      price: 10000,
     },
     {
       id: "pet_wqf0rv0i17",
-      name: "댕댕이17",
+      title: "댕댕이장난감17",
+      price: 10000,
     },
     {
       id: "pet_wqf0rv0i18",
-      name: "댕댕이18",
+      title: "댕댕이장난감18",
+      price: 10000,
     },
     {
       id: "pet_wqf0rv0i19",
-      name: "댕댕이19",
+      title: "댕댕이장난감19",
+      price: 10000,
     },
     {
       id: "pet_wqf0rv0i20",
-      name: "댕댕이20",
+      title: "댕댕이장난감20",
+      price: 10000,
     },
     {
       id: "pet_wqf0rv0i21",
-      name: "댕댕이21",
+      title: "댕댕이장난감21",
+      price: 10000,
     },
-  ] as Pet[],
+  ] as Product[],
 };
 
-export const getPets = () => {
-  return collections.pets;
+export const getProducts = () => {
+  return collections.products;
 };
 
-export const getPetByID = (id: string): Pet | undefined => {
-  return collections.pets.find((pet) => pet.id === id);
+export const getProductByID = (id: string): Product | undefined => {
+  return collections.products.find((product) => product.id === id);
 };
 
-export const createPet = (pet: PetInput): Pet => {
-  const newPet = {
-    ...pet,
+export const createProduct = (product: ProductInput): Product => {
+  const newProduct = {
+    ...product,
     id: generateRandomID("pet_"),
   };
-  collections.pets.push(newPet);
-  return newPet;
+  collections.products.push(newProduct);
+  return newProduct;
 };
