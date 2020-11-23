@@ -1,5 +1,6 @@
 import { gql, NetworkStatus } from "@apollo/client";
 import React from "react";
+import { Link } from "react-router-dom";
 import {
   ProductsQuery,
   useAddProductMutation,
@@ -36,8 +37,6 @@ export const ProductList: React.FC = () => {
     },
   });
 
-  console.log(`networkStatus: ${networkStatus}`);
-
   const [addProduct] = useAddProductMutation({
     update(cache, { data }) {
       const { addProduct } = data!;
@@ -71,7 +70,9 @@ export const ProductList: React.FC = () => {
   return (
     <ul>
       {(data?.products ?? []).map((product) => (
-        <li key={product.id}>{product.title}</li>
+        <li key={product.id}>
+          <Link to={`/product/${product.id}`}>{product.title}</Link>
+        </li>
       ))}
       {renderFetchMoreIndicator()}
       <button
