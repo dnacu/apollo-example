@@ -69,18 +69,14 @@ export const ProductList: React.FC = () => {
                 price,
               },
             },
-            // optimisticResponse: {
-            // addPet: {
-            //   __typename: "Pet",
-            //   id: "pet_unknown",
-            //   name,
-            // },
-            // addProduct: {
-            //   __typename: "Product",
-            //   title,
-            //   price,
-            // }
-            // },
+            optimisticResponse: {
+              addProduct: {
+                __typename: "Product",
+                id: "prd_unknown",
+                title,
+                price,
+              },
+            },
           });
         }}
       >
