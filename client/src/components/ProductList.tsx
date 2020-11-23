@@ -7,8 +7,8 @@ import {
 } from "../generated/graphql";
 
 const PRODUCTS_QUERY = gql`
-  query products {
-    products {
+  query products($offset: Int = 0, $limit: Int = 10) {
+    products(offset: $offset, limit: $limit) {
       id
       title
       price
@@ -27,8 +27,12 @@ const ADD_PRODUCT_MUTATION = gql`
 `;
 
 export const ProductList: React.FC = () => {
-  const { data, loading, error, refetch } = useProductsQuery({
+  const { data, loading, error, refetch, fetchMore } = useProductsQuery({
     fetchPolicy: "cache-first",
+    variables: {
+      offset: 0,
+      limit: 10,
+    },
   });
 
   const [addProduct] = useAddProductMutation({
@@ -58,6 +62,13 @@ export const ProductList: React.FC = () => {
       {(data?.products ?? []).map((product) => (
         <li key={product.id}>{product.title}</li>
       ))}
+      <button
+        onClick={() => {
+          fetchMore({ variables: { offset: data?.products?.length } });
+        }}
+      >
+        더보기
+      </button>
       <button
         onClick={() => {
           const title = prompt() ?? "";

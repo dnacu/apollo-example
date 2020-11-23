@@ -3,8 +3,11 @@ import { Product, ProductInput } from "./models/Product";
 
 export default {
   Query: {
-    products: (): Product[] => {
-      return getProducts();
+    products: (
+      _parent: unknown,
+      args: { offset: number; limit: number }
+    ): Product[] => {
+      return getProducts(args.offset, args.limit);
     },
   },
   Mutation: {

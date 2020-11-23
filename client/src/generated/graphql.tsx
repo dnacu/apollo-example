@@ -31,6 +31,12 @@ export type Query = {
   products?: Maybe<Array<Product>>;
 };
 
+
+export type QueryProductsArgs = {
+  offset?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   addProduct?: Maybe<Product>;
@@ -47,7 +53,10 @@ export enum CacheControlScope {
 }
 
 
-export type ProductsQueryVariables = Exact<{ [key: string]: never; }>;
+export type ProductsQueryVariables = Exact<{
+  offset?: Maybe<Scalars['Int']>;
+  limit?: Maybe<Scalars['Int']>;
+}>;
 
 
 export type ProductsQuery = (
@@ -73,8 +82,8 @@ export type AddProductMutation = (
 
 
 export const ProductsDocument = gql`
-    query products {
-  products {
+    query products($offset: Int, $limit: Int) {
+  products(offset: $offset, limit: $limit) {
     id
     title
     price
@@ -94,6 +103,8 @@ export const ProductsDocument = gql`
  * @example
  * const { data, loading, error } = useProductsQuery({
  *   variables: {
+ *      offset: // value for 'offset'
+ *      limit: // value for 'limit'
  *   },
  * });
  */
