@@ -1,4 +1,4 @@
-import { createProduct, getProducts } from "./db";
+import { createProduct, getProductByID, getProducts } from "./db";
 import { Product, ProductInput } from "./models/Product";
 
 export default {
@@ -8,6 +8,9 @@ export default {
       args: { offset: number; limit: number }
     ): Product[] => {
       return getProducts(args.offset, args.limit);
+    },
+    product: (_parent: unknown, args: { id: string }): Product => {
+      return getProductByID(args.id);
     },
   },
   Mutation: {

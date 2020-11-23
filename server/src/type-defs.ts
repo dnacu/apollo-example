@@ -14,6 +14,7 @@ export default gql`
 
   type Query {
     products(offset: Int, limit: Int): [Product!]
+    product(id: ID!): Product
   }
 
   type Mutation {
