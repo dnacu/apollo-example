@@ -1,4 +1,4 @@
-import { gql } from "@apollo/client";
+import { gql, NetworkStatus } from "@apollo/client";
 import React from "react";
 import {
   ProductsQuery,
@@ -27,13 +27,16 @@ const ADD_PRODUCT_MUTATION = gql`
 `;
 
 export const ProductList: React.FC = () => {
-  const { data, loading, error, refetch, fetchMore } = useProductsQuery({
+  const { data, error, networkStatus, fetchMore } = useProductsQuery({
     fetchPolicy: "cache-first",
+    notifyOnNetworkStatusChange: true,
     variables: {
       offset: 0,
       limit: 10,
     },
   });
+
+  console.log(`networkStatus: ${networkStatus}`);
 
   const [addProduct] = useAddProductMutation({
     update(cache, { data }) {
@@ -49,19 +52,28 @@ export const ProductList: React.FC = () => {
       });
     },
   });
-  if (loading) {
+  if (networkStatus === NetworkStatus.loading) {
     return <h1>로딩 중입니다</h1>;
   }
 
-  if (error) {
+  if (networkStatus === NetworkStatus.error) {
     return <p>에러!!: {JSON.stringify(error)}</p>;
   }
+
+  const renderFetchMoreIndicator = () => {
+    return (
+      networkStatus === NetworkStatus.fetchMore && (
+        <div className="loading">fetch more...</div>
+      )
+    );
+  };
 
   return (
     <ul>
       {(data?.products ?? []).map((product) => (
         <li key={product.id}>{product.title}</li>
       ))}
+      {renderFetchMoreIndicator()}
       <button
         onClick={() => {
           fetchMore({ variables: { offset: data?.products?.length } });
